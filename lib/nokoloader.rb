@@ -9,4 +9,8 @@ class NokoLoader
     f.close
     doc
   end
+
+  def get_review
+
+  end
 end
