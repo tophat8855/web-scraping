@@ -40,3 +40,5 @@ end
 restaurant = Restaurant.new(html_doc)
 
 p restaurant.health_score
+
+p restaurant.also_viewed
