@@ -2,12 +2,13 @@ require 'Nokogiri'
 require 'RestClient'
 require_relative './lib/review'
 require_relative './lib/restaurant'
+require_relative './lib/health_crawler.rb'
 
-def score_distribution(reviews)
+host_url = 'http://www.yelp.com'
 
-end
+url_to_scrape_from = '/biz/mcdonalds-berkeley-4'
 
-file = RestClient.get('http://www.yelp.com/biz/fat-angel-san-francisco', user_agent: "Chrome")
+file = RestClient.get(host_url + url_to_scrape_from, user_agent: "Chrome")
 
 # file = File.open('data/fat-angel.html')
 html_doc = Nokogiri::HTML(file)
@@ -29,10 +30,10 @@ end
 
 # p stars
 #
-# first_review = array_of_reviews.first
+ first_review = array_of_reviews.first
 # p first_review.date
 # p first_review.star_count
-# p first_review.author
+ p first_review.author
 # p first_review.text
 # p first_review.five_star?
 
@@ -42,3 +43,7 @@ restaurant = Restaurant.new(html_doc)
 p restaurant.health_score
 
 p restaurant.also_viewed
+
+healthy_restaurant = HealthCrawler.new(url_to_scrape_from, host_url)
+
+p healthy_restaurant.search

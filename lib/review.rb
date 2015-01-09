@@ -1,4 +1,4 @@
-class Review
+class Review #< ActiveRecord::Base
   attr_accessor :content, :date, :star_count, :author, :text, :html
   def initialize(content)
     @content = content
