@@ -1,10 +1,18 @@
 require 'Nokogiri'
 require_relative './lib/review'
 
-file = File.open('data/fat-angel.html')
-html_doc = Nokogiri::HTML(file.read)
+def score_distribution(reviews)
+  
+end
 
-first_review = Review.new(html_doc)
+file = File.open('data/fat-angel.html')
+noko_html_doc = Nokogiri::HTML(file.read)
+
+array_of_reviews = noko_html_doc.css("ul.reviews > li").map {|review| Review.new(review)}
+
+
+
+first_review = array_of_reviews.first
 p first_review.date
 p first_review.star_count
 p first_review.author
