@@ -1,13 +1,15 @@
 require 'Nokogiri'
+require 'RestClient'
 require_relative './lib/review'
 
 def score_distribution(reviews)
 
 end
 
-file = File.open('data/fat-angel.html')
-noko_html_doc = Nokogiri::HTML(file.read)
+file = RestClient.get('http://www.yelp.com/biz/fat-angel-san-francisco', user_agent: "Chrome")
 
+# file = File.open('data/fat-angel.html')
+html_doc = Nokogiri::HTML(file)
 array_of_reviews = []
 
 stars = {
@@ -18,7 +20,7 @@ stars = {
   "5.0" => 0,
 }
 
-noko_html_doc.css("ul.reviews > li").each do |review|
+html_doc.css("ul.reviews > li").each do |review|
   new_review = Review.new(review)
   array_of_reviews << new_review
   stars[new_review.star_count] += 1
