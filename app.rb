@@ -1,6 +1,7 @@
 require 'Nokogiri'
 require 'RestClient'
 require_relative './lib/review'
+require_relative './lib/restaurant'
 
 def score_distribution(reviews)
 
@@ -26,11 +27,16 @@ html_doc.css("ul.reviews > li").each do |review|
   stars[new_review.star_count] += 1
 end
 
-p stars
+# p stars
+#
+# first_review = array_of_reviews.first
+# p first_review.date
+# p first_review.star_count
+# p first_review.author
+# p first_review.text
+# p first_review.five_star?
 
-first_review = array_of_reviews.first
-p first_review.date
-p first_review.star_count
-p first_review.author
-p first_review.text
-p first_review.five_star?
+
+restaurant = Restaurant.new(html_doc)
+
+p restaurant.health_score
