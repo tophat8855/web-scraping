@@ -1,4 +1,4 @@
-require_relative '../database.rb'
+require_relative '../database'
 
 class CreateReviews < ActiveRecord::Migration
   def up
